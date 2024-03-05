@@ -1,0 +1,31 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background-image: linear-gradient(160deg, #071014 0%, #0db8de 100%) !important;
+  }
+  
+  .card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Ajusta la altura del card según tus necesidades */
+    height: 420px;
+    /* Alinea el contenido del card verticalmente y centraliza el botón */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Ajustes para el botón */
+  .card button {
+    margin-top: 20px; /* Espacio superior al botón */
+  }
+  .card a.btn-link {
+    color: #0db8de;     /* Color del enlace */
+    text-decoration: none; /* Quita la subrayado del enlace */
+    font-weight: bold;   /* Hace el texto más audaz (bold) */
+    font-size: 16px;     /* Tamaño del texto */
+  }

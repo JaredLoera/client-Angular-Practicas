@@ -1,0 +1,27 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background-image: linear-gradient(160deg, #071014 0%, #0db8de 100%) !important;
+  }
+  
+  .card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .card button {
+    margin-top: 20px; 
+  }
+  .card a.btn-link {
+    color: #0db8de;     
+    text-decoration: none; 
+    font-weight: bold;   
+    font-size: 16px;     
+  }
