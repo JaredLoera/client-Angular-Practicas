@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   register(user:User):Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/register`, user);
+    return this.http.post<User>(`${this.baseUrl}/register`, user)  
   }
 
   setAuthToken(token: string): void {
@@ -51,9 +51,11 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getAuthToken();
   }
+
   verifyUser(id: number, signature: string): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/verify-mail/${id}?signature=${signature}`);
   }
+
   sendEmailConfirm(): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/send-email-confirm`, {headers: {Authorization: `Bearer ${this.getAuthToken()}`}});
   }

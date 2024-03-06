@@ -6,6 +6,10 @@ import { User } from '../../models/user';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { ValidateErrors } from '../../models/validateErrors';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +25,8 @@ export class RegisterComponent implements OnInit {
   public userForm: FormGroup;
   formSubmittedErrors = false;
   user: User = new User();
+  errorValidations:ValidateErrors[] = [];
+
   constructor(private fb: FormBuilder, private authService: AuthService, private route: ActivatedRoute, private router: Router){
     this.userForm = this.fb.group({
       email: [this.user.email, [Validators.required, Validators.email]],
@@ -35,10 +41,16 @@ export class RegisterComponent implements OnInit {
   submitForm() {
     if (this.userForm.valid) {
       this.user = this.userForm.value;
-      this.authService.register(this.user).subscribe((user: User) => {
-        console.log('User registered', user);
+      this.authService.register(this.user).pipe(
+        catchError((error:HttpErrorResponse) => {
+          if(error.status === 400) {
+            this.errorValidations = error.error['errors'];
+          }
+          return throwError(() => new Error('algo paso, Por favor intente depues.'));
+        }
+      )).subscribe(() => {
         this.router.navigate(['']);
-      });
+      })
     }
     else {
       this.formSubmittedErrors = true;

@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit{
   }
 
   ngOnInit():void{
+    console.log(this.authService.getAuthToken() );
     if(!this.authService.isLoggedIn()){
       this.router.navigate(['']);
     }

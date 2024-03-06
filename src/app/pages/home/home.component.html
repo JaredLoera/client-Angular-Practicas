@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <span class="fs-4 mb-2">pelisPeda</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                </li>
+                <li class="nav-item dropdown" (mouseover)="onMouseOverSeries()" (mouseout)="onMouseOutSeries()">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Series
+                    </a>
+                    <ul class="dropdown-menu" [ngClass]="{'show': showSeriesDropdown}">
+                      <li><a class="dropdown-item" href="#">Terror</a></li>
+                      <li><a class="dropdown-item" href="#">Comedia</a></li>
+                      <li><a class="dropdown-item" href="#">Drama</a></li>
+                      <li><a class="dropdown-item" href="#">Accion</a></li>
+                    </ul>
+                  </li>
+                <li class="nav-item dropdown" (mouseover)="onMouseOverMovies()" (mouseout)="onMouseOutMovies()" >
+                    <a class="nav-link dropdown-toggle">Peliculas</a>
+                    <ul class="dropdown-menu"  [ngClass]="{'show': showMoviesDropdown}">
+                        <li><a class="dropdown-item" href="#peliculas">Terror</a></li>
+                        <li><a class="dropdown-item" href="#">Comedia</a></li>
+                        <li><a class="dropdown-item" href="#">Drama</a></li>
+                        <li><a class="dropdown-item" href="#">Accion</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div id="carouselExample" class="carousel slide bg-warning">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="../../../assets/walli.jpg" class="d-block custom-img" alt="...">
+        <div class="carousel-caption">
+            <h1>Wall-E</h1>
+           <h5><p>Una película increíble sobre un robot solitario en la Tierra.</p> </h5>
+          </div>
+      </div>
+      <div class="carousel-item">
+        <img src="../../../assets/walli.jpg" class="d-block custom-img" alt="...">
+        <div class="carousel-caption">
+            <h1>Wall-E</h1>
+            <h5> <p>Una película increíble sobre un robot solitario en la Tierra.</p> </h5>
+          </div>
+      </div>
+      <div class="carousel-item">
+        <img src="../../../assets/walli.jpg" class="d-block custom-img" alt="...">
+        <div class="carousel-caption">
+            <h1>Wall-E</h1>
+            <h5><p>Una película increíble sobre un robot solitario en la Tierra.</p></h5>
+          </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="text-danger">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="text-danger">Next</span>
+    </button>
+  </div>
+  <div class="container mt-4">
+    <div class="row">
+      <div *ngFor="let movie of peliculas" class="col-12 col-md-4 mb-4">
+      <div class="card">
+          <img [src]="'http://localhost:8000/'+movie.imagen_url" class="card-img-top" alt="Movie Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.titulo }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

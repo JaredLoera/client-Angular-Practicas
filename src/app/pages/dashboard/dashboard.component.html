@@ -1,62 +1,58 @@
-
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <div class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Menu</span>
-                </div>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <span class="fs-4 mb-2">pelisPeda</span>
+      <div class="flex-shrink-0 dropdown">
+        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person fs-4"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser2" style="right: 30px;">
+            <li><a class="dropdown-item" href="#">Configuracion <i class="bi bi-gear fs-5 text-primary"></i></a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><button class="dropdown-item" (click)="closeSession()">Cerrar sesion <i class="bi bi-box-arrow-right fs-5 text-danger"></i></button></li>
+        </ul>
+    </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-auto bg-light sticky-top">
+            <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
+                <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto">
                     <li class="nav-item">
-                        <div class="nav-link  text-white align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline fs-4">Inicio</span>
-                        </div>
+                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+                            <i class="bi-house fs-1"></i>
+                        </a>
                     </li>
-                    <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link text-white px-0 align-middle">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Panel</span> </a>
-                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <div  class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Item</span> 1 </div>
-                            </li>
-                            <li>
-                                <div  class="nav-link text-white px-0"> <span class="d-none d-sm-inline">Item</span> 1 </div>
-                            </li>
-                        </ul>
-                    </li> 
+                    <li class="nav-item">
+                        <button href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Administradores">
+                            <i class="bi-people fs-1"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Usuarios">
+                            <i class="bi bi-film fs-1"></i>
+                        </a>
+                    </li>
                 </ul>
-                <hr>
-                <div class="dropdown pb-4">
-                    <a href="#submenuDos" data-bs-toggle="collapse" class="nav-link text-white">
-                       <p style="text-size-adjust: 30px;">{{user.email}}</p> </a>
-                        <ul class="collapse nav flex-column ms-1" id="submenuDos" data-bs-parent="#menu">
-                            <li>
-                                <div class="nav-link px-0"> 
-                                    <a [routerLink]="['/configuration']"  class="text-white" style="text-decoration: none;">
-                                    <span class="d-none d-sm-inline ">Configuracion</span> 
-                                 </a>               
-                                </div>
-                            </li>
-                            <li>
-                                <div class="nav-link  px-0  d-sm-inline"> 
-                                    <a (click)="closeSession()" class="text-danger" href="" style="text-decoration: none;">Cerrar Sesión</a>
-                              </div>
-                            </li>
-                        </ul>
-                </div>
             </div>
         </div>
-        <div class="col py-3">
-            <ng-container *ngIf="!user.it_is_verified">
-                <div class="alert alert-warning" role="alert">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>¡Atención!</strong> Tu correo aún no ha sido confirmado.
+        <div class="col-sm p-3 min-vh-100">
+            <!-- contenido -->
+            <div class="col py-3">
+                <ng-container *ngIf="!user.it_is_verified">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>¡Atención!</strong> Tu correo aún no ha sido confirmado.
+                            </div>
+                            <button type="button" class="btn btn-primary" (click)="sendEmailConfirm()">Enviar Correo</button>
+                            <button type="button" class="btn-close mt-1" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        <button type="button" class="btn btn-primary" (click)="sendEmailConfirm()">Enviar Correo</button>
                     </div>
-                </div>
-            </ng-container>
+                </ng-container>
+            </div>
         </div>
     </div>
 </div>

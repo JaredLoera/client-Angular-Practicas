@@ -12,6 +12,11 @@
                     <label for="usuario">Usuario</label>
                 </h3>
                 <input type="text" class="form-control " id="usuario" placeholder="Ingresa tu correo" formControlName="email">
+                <div *ngFor="let esror of errorValidations" class="mt-1 text-danger">
+                  <div *ngIf="esror.rule == 'unique'">
+                  {{esror.message}}.
+                  </div>
+                </div>
                 <div *ngIf="formSubmittedErrors && userForm.get('email')!.invalid" class="mt-1 text-danger">
                     <div *ngIf="userForm.get('email')?.errors?.['required']">El correo es requerido.</div>
                     <div *ngIf="userForm.get('email')?.errors?.['email']">Debe de ser un correo valido.</div>
@@ -23,7 +28,7 @@
                 </h3>
                 <input type="password" class="form-control" id="contrasena" placeholder="Ingresa tu contraseña"  formControlName="password">
                 <div *ngIf="formSubmittedErrors && userForm.get('password')!.invalid" class="mt-1 text-danger">
-                    <div *ngIf="userForm.get('password')?.errors?.['required']">La contraseña.</div>
+                    <div *ngIf="userForm.get('password')?.errors?.['required']">La contraseña es requerida.</div>
                 </div>
               </div>
                 <div class="text-center mt-2 mb-5">
