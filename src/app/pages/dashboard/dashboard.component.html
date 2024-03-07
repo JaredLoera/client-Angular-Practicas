@@ -1,42 +1,8 @@
-<nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
-      <span class="fs-4 mb-2">pelisPeda</span>
-      <div class="flex-shrink-0 dropdown">
-        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="bi bi-person fs-4"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser2" style="right: 30px;">
-            <li><a class="dropdown-item" href="#">Configuracion <i class="bi bi-gear fs-5 text-primary"></i></a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><button class="dropdown-item" (click)="closeSession()">Cerrar sesion <i class="bi bi-box-arrow-right fs-5 text-danger"></i></button></li>
-        </ul>
-    </div>
-    </div>
-  </nav>
+  <app-nav></app-nav>
   <div class="container-fluid">
     <div class="row">
         <div class="col-sm-auto bg-light sticky-top">
-            <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
-                <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-                            <i class="bi-house fs-1"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <button href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Administradores">
-                            <i class="bi-people fs-1"></i>
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Usuarios">
-                            <i class="bi bi-film fs-1"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <app-off-canvas></app-off-canvas>
         </div>
         <div class="col-sm p-3 min-vh-100">
             <!-- contenido -->

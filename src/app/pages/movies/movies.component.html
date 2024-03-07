@@ -1,0 +1,54 @@
+<app-nav></app-nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-auto bg-light sticky-top">
+          <app-off-canvas></app-off-canvas>
+        </div>
+        <div class="col-sm p-3 min-vh-100">
+            <!-- contenido -->
+            <div class="col py-3">
+                <ng-container *ngIf="!user.it_is_verified">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>¡Atención!</strong> Tu correo aún no ha sido confirmado.
+                            </div>
+                            <button type="button" class="btn btn-primary">Enviar Correo</button>
+                            <button type="button" class="btn-close mt-1" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titulo</th>
+                            <th>Descripcion</th>
+                            <th>Imagen</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="peliculas">
+                            <td colspan="5" class="text-center">No hay peliculas</td>
+                        </tr>
+                        <tr *ngFor="let movie of peliculas">
+                            <td>{{ movie.id }}</td>
+                            <td>{{ movie.titulo }}</td>
+                            <td>{{ movie.descripcion }}</td>
+                            <td><img [src]="'http://localhost:8000/'+movie.imagen_url" alt="Movie Image"
+                                    style="width: 100px; height: 100px;"></td>
+                            <td>
+                                <button class="btn btn-primary">Editar</button>
+                                <button class="btn btn-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

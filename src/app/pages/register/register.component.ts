@@ -10,13 +10,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ValidateErrors } from '../../models/validateErrors';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -26,7 +28,7 @@ export class RegisterComponent implements OnInit {
   formSubmittedErrors = false;
   user: User = new User();
   errorValidations:ValidateErrors[] = [];
-
+  
   constructor(private fb: FormBuilder, private authService: AuthService, private route: ActivatedRoute, private router: Router){
     this.userForm = this.fb.group({
       email: [this.user.email, [Validators.required, Validators.email]],

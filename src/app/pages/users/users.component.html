@@ -1,0 +1,48 @@
+<app-nav></app-nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-auto bg-light sticky-top">
+            <app-off-canvas></app-off-canvas>
+        </div>
+        <div class="col-sm p-3 min-vh-100">
+            <!-- contenido -->
+            <div class="col py-3">
+                <ng-container *ngIf="!user.it_is_verified">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>¡Atención!</strong> Tu correo aún no ha sido confirmado.
+                            </div>
+                            <button type="button" class="btn btn-primary">Enviar Correo</button>
+                            <button type="button" class="btn-close mt-1" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>Verificado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="users">
+                            <td colspan="5" class="text-center">No hay usuarios</td>
+                        </tr>
+                        <tr *ngFor="let user of users">
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{user.rol_nombre}}</td>
+                            <td>{{user.it_is_verified}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

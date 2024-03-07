@@ -3,13 +3,16 @@ import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { NavComponent } from '../../components/nav/nav.component';
+import { OffCanvasComponent } from '../../components/off-canvas/off-canvas.component';
+
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CommonModule,RouterModule
+    CommonModule,RouterModule,NavComponent,OffCanvasComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
@@ -17,13 +20,6 @@ import { RouterModule, Routes } from '@angular/router';
 export class DashboardComponent implements OnInit{
   user = new User();
   constructor(private authService: AuthService, private router: Router){}
-
-  closeSession(){
-    this.authService.logout();
-    this.authService.clearAuthToken();
-    this.router.navigate(['']);
-  }
-
   ngOnInit():void{
     console.log(this.authService.getAuthToken() );
     if(!this.authService.isLoggedIn()){
@@ -32,6 +28,9 @@ export class DashboardComponent implements OnInit{
     this.authService.profile().subscribe((user:User) => {
       console.log('User profile', user);
       this.user = user;
+        if(!(user.rol_nombre=="Administrador")){
+          this.router.navigate(['']);
+        }
     })
   }
   sendEmailConfirm(){

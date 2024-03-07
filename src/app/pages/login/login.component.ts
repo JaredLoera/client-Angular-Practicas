@@ -7,13 +7,15 @@ import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { Token } from '../../models/token';
 import { ActivatedRoute, Router } from '@angular/router';
+import {RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
