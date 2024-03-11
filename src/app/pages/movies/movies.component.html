@@ -28,22 +28,22 @@
                             <th>Titulo</th>
                             <th>Descripcion</th>
                             <th>Imagen</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngIf="peliculas">
+                        <tr *ngIf="peliculas.length<=0">
                             <td colspan="5" class="text-center">No hay peliculas</td>
                         </tr>
                         <tr *ngFor="let movie of peliculas">
-                            <td>{{ movie.id }}</td>
+                            <td>
+                                <a [routerLink]="['/player/',movie.id]">
+                                <i class="bi bi-play fs-4"></i>
+                                </a>
+                            </td>
                             <td>{{ movie.titulo }}</td>
                             <td>{{ movie.descripcion }}</td>
-                            <td><img [src]="'http://localhost:8000/'+movie.imagen_url" alt="Movie Image"
-                                    style="width: 100px; height: 100px;"></td>
                             <td>
-                                <button class="btn btn-primary">Editar</button>
-                                <button class="btn btn-danger">Eliminar</button>
+                                <img [src]="'http://localhost:8000/'+movie.imagen_url" alt="Movie Image" style="width: 100px; height: 100px;">
                             </td>
                         </tr>
                     </tbody>

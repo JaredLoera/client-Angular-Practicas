@@ -31,9 +31,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngIf="users">
-                            <td colspan="5" class="text-center">No hay usuarios</td>
-                        </tr>
+                        <ng-template [ngIf]="users.length <= 0">
+                            <tr>
+                                <td colspan="5" class="text-center">No hay usuarios</td>
+                            </tr>
+                        </ng-template>
                         <tr *ngFor="let user of users">
                             <td>{{ user.id }}</td>
                             <td>{{ user.email }}</td>

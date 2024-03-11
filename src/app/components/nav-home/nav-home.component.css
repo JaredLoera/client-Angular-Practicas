@@ -1,0 +1,8 @@
+.custom-img {
+    max-height: 485px;
+    width: 100%;
+  }
+  
+  .bg-degraded {
+    background-image: linear-gradient(90deg, #071014 0%, #071014 30%,#071014 60%,#071014 85%, #024655 100%) !important;
+  }

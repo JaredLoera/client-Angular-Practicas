@@ -9,12 +9,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { NgOptimizedImage } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
     provideClientHydration(),
     importProvidersFrom(CommonModule,ReactiveFormsModule,FormsModule,HttpClientModule,RouterModule),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    NgOptimizedImage
   ]
 };

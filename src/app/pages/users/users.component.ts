@@ -5,7 +5,7 @@ import { NavComponent } from '../../components/nav/nav.component';
 import { RouterModule,Router } from '@angular/router';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth/auth.service';
-
+import { UserService } from '../../services/users/user.service';
 @Component({
   selector: 'app-users',
   standalone: true,
@@ -21,7 +21,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class UsersComponent implements OnInit {
   users: User[] = [];
   user = new User();
-  constructor(private authService: AuthService,private router:Router) { }
+  constructor(private authService: AuthService,private userService :UserService ,private router:Router) { }
   ngOnInit(): void {
     this.authService.profile().subscribe((user: User) => {
       console.log('User profile', user);
@@ -30,6 +30,8 @@ export class UsersComponent implements OnInit {
         this.router.navigate(['']);
       }
     })
+    this.userService.getUsers().subscribe((users: User[]) => {
+      this.users = users;
+    });
   }
-
 }

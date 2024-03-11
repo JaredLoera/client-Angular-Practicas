@@ -7,6 +7,9 @@ import { VerifyMailComponent } from './pages/verify-mail/verify-mail.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MoviesComponent } from './pages/movies/movies.component';
 import { UsersComponent } from './pages/users/users.component';
+import { PlayerComponent } from './pages/player/player.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { GeneroComponent } from './pages/genero/genero.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -16,5 +19,8 @@ export const routes: Routes = [
     { path: 'configuration', component: ConfigurationComponent},
     { path: 'verify-mail/:id', component: VerifyMailComponent},
     { path: 'movies', component: MoviesComponent},
-    { path: 'users', component: UsersComponent}
+    { path: 'users-table', component: UsersComponent},
+    { path: 'player/:id', component: PlayerComponent},
+    { path: 'genero/:genero', component: GeneroComponent},
+    { path: '**', component: NotFoundComponent}
 ];

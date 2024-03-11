@@ -1,29 +1,44 @@
+
+.bg-degraded{
+    background-image: linear-gradient(90deg, #071014 0%, #071014 30%,#071014,#071014 85%, #024655 100%) !important;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.cuadro-scroll {
+    width: 780px;
+    height: 95px; 
+    overflow: auto; 
+    padding: 10px;
+    color: white; 
+}
+.DescriptionArchive {
+    font-family: Arial, sans-serif; 
+}
+.cuadro-scroll::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.cuadro-scroll::-webkit-scrollbar-thumb {
+    background-color: #0db8de; 
+}
+
+.cuadro-scroll::-moz-scrollbar {
+    width: 8px; 
+}
+
+.cuadro-scroll::-moz-scrollbar-thumb {
+    background-color: #0db8de; 
+}
 .custom-img {
     max-height: 485px;
     width: 100%;
   }
-
-  .bg-degraded {
-    background-image: linear-gradient(160deg, #071014 0%, #071014 30%, #0f2128 60%, #0db8de 100%) !important;
-  }
-
-  .image-container {
+.image-container {
     position: relative;
   }
   
-  .image-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(160deg, #071014 0%,#071014 50%, #0db8de 100%);
-    opacity: 0.5; /* Ajusta la opacidad según tus preferencias */
-  }
-
-  .position-relative {
-  position: relative;
-}
 .movie-link {
   position: relative;
   display: inline-block;

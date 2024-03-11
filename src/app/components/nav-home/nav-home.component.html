@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-degraded">
+    <div class="container-fluid">
+        <img width="40px" height="40px" src="../../../assets/descarga.png" > <span class="fs-4 mb-2 text-white" >pelisPeda</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active text-white fs-5" aria-current="page" href="#">Inicio</a>
+                </li>  
+             <!--<li class="nav-item dropdown" (mouseover)="onMouseOverSeries()" (mouseout)="onMouseOutSeries()">
+                    <a class="nav-link dropdown-toggle  text-white fs-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Series
+                    </a>
+                    <ul class="dropdown-menu" [ngClass]="{'show': showSeriesDropdown}">
+                      <li><a class="dropdown-item" href="#">Terror</a></li>
+                      <li><a class="dropdown-item" href="#">Comedia</a></li>
+                      <li><a class="dropdown-item" href="#">Drama</a></li>
+                      <li><a class="dropdown-item" href="#">Accion</a></li>
+                    </ul>
+                  </li>-->
+                <li class="nav-item dropdown" (mouseover)="onMouseOverMovies()" (mouseout)="onMouseOutMovies()" >
+                    <a class="nav-link dropdown-toggle text-white fs-5">Peliculas</a>
+                    <ul class="dropdown-menu"  [ngClass]="{'show': showMoviesDropdown}">
+                        <li><a class="dropdown-item" href="">Ultimas agregadas</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown" (mouseover)="onMouseOverGeneros()" (mouseout)="onMouseOutGeneros()">
+                  <a class="nav-link dropdown-toggle text-white fs-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Generos
+                  </a>
+                  <ul class="dropdown-menu" [ngClass]="{'show': showGenerosDropdown}">
+                    <div *ngFor="let genero of generos">
+                      <li><a class="dropdown-item" [routerLink]="['/genero/',genero.nombre]" (click)="onMouseOutGeneros()">{{genero.nombre}}</a></li>
+                    </div>
+                  </ul>
+                </li>
+            </ul>
+            <form class="d-flex me-4" role="search">
+                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                <button class="btn fs-5 text-white" type="submit">Buscar</button>
+            </form>
+            <!--LOGIN-->
+            <div *ngIf="user.id; then userblock else login"></div>
+            <ng-template #userblock>
+            <div class="flex-shrink-0 dropdown">
+                <a href="#" class="d-block text-white text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person fs-3 text-white"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser2" style="right: 30px;">
+                      <ng-template [ngIf]="user.rol_nombre == 'Administrador'">
+                      <li><a class="dropdown-item" [routerLink]="['dashboard']">Dashboard <i class="bi bi-gear fs-5 text-primary"></i></a></li>
+                    </ng-template> 
+                    <li><a class="dropdown-item" [routerLink]="['profile']">perfil <i class="bi bi-person-lines-fill fs-5 text-primary"></i></a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                  </li>
+                  <li><button class="dropdown-item" (click)="closeSesion()" >Cerrar sesion <i class="bi bi-box-arrow-right fs-5 text-danger"></i></button></li>
+                </ul>
+            </div>
+          </ng-template>
+          <ng-template #login>
+            <a [routerLink]="['login']" class="d-block link-dark text-decoration-none">
+              <i class="bi bi-person fs-3"></i>
+            </a>
+          </ng-template>          
+        
+        </div>
+    </div>
+</nav>

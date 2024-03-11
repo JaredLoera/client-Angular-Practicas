@@ -18,6 +18,6 @@ export class NavComponent {
   closeSession(){
     this.authService.logout();
     this.authService.clearAuthToken();
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
   }
 }

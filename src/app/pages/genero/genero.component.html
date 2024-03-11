@@ -1,0 +1,34 @@
+<app-nav-home [user]="user"></app-nav-home>
+<div class="bg-degraded">
+    <div class="container-md">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-white mt-5">Peliculas de {{genero.nombre}}</h1>
+            </div>
+            <div class="cuadro-scroll">
+                <div class="DescriptionArchive">
+                   {{genero.descripcion}}
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div *ngFor="let movie of peliculas" class="col-12 col-md-4 mb-4 mt-3">
+                <a [routerLink]="['/player', movie.id]" class="movie-link text-decoration-none">
+                  <div class="card">
+                    <img [src]="'http://localhost:8000/'+movie.imagen_url" class="card-img-top" alt="Movie Image">
+                    <div class="card-body bg-degraded-purple">
+                      <h4 class="card-title text-white">{{ movie.titulo }}</h4>
+                    </div>
+                  </div>
+                  <div class="popover bg-degraded-purple">
+                    <div class="arrow"></div>
+                    <h3 class="popover-header ">{{ movie.titulo }}</h3>
+                    <div class="popover-body text-white">
+                     {{movie.descripcion.substring(0, 100) + '...'}}
+                    </div>
+                  </div>
+                </a>
+              </div>
+        </div>
+    </div>
+</div>

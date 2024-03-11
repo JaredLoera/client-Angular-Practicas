@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { Token } from '../../models/token';
 import { ActivatedRoute, Router } from '@angular/router';
 import {RouterModule} from '@angular/router';
+import { NavHomeComponent } from '../../components/nav-home/nav-home.component';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ import {RouterModule} from '@angular/router';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    NavHomeComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
