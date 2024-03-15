@@ -1,0 +1,90 @@
+<app-nav-home [user]="user"></app-nav-home>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-auto bg-light sticky-top">
+            <app-off-canvas-viewer></app-off-canvas-viewer>
+        </div>
+        <div class="col-sm p-3 min-vh-100">
+          <div class="row">
+            <h1>Mis salas</h1>
+          </div>
+            <div class="row">
+                <div class="col-12">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Crear sala
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Crear sala</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <form (ngSubmit)="submitForm()" [formGroup]="salaFrom">
+                            <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Nombre de la sala</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="nombre">
+                            <div *ngIf="formSubmittedErrors && salaFrom.get('nombre')!.invalid" class="mt-1 text-danger">
+                                <div *ngIf="salaFrom.get('nombre')?.errors?.['required']">El nombre es requerido.</div>
+                            </div>
+                            <div id="emailHelp" class="form-text">Este sera el nombre de la sala tuya.</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Guardar sala</button> 
+                                </div>
+                        </form>  
+                        
+                        </div>
+                        
+                    </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                </div>
+          <div class="row">
+            <div class="col-6 col-md-6 mt-5">
+               <h6>
+                Te presentamos los <strong>grupos de peliculas</strong>
+                <p class="mt-2"> en donde podras crear para
+                    ver con tus amigos, familiares o compañeros de trabajo.</p>
+               </h6>
+            </div>
+            <div class="col-6 col-md-6">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Acciones</th>
+                        <th scope="col">Anfintrion</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let sala of salas">
+                            <td>{{sala.nombre}}</td>
+                            <td>
+                               <a [routerLink]="['/room/',sala.id]"><h4>Ver<i class="bi bi-eye"></i></h4></a> 
+                            </td>
+                            <td>
+                              Tu
+                            </td>
+                        </tr>
+                        <tr *ngFor="let salaInvitado of salasInvitado">
+                          <td>{{salaInvitado.nombre}}</td>
+                          <td>
+                             <a [routerLink]="['/room/',salaInvitado.id]"><h4>Ver<i class="bi bi-eye"></i></h4></a> 
+                          </td>
+                          <td>
+                            {{salaInvitado.user.email}}
+                          </td>
+                        </tr>
+                    </tbody>
+                  </table>
+            </div>
+             
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PeliculasService } from '../../services/peliculas/peliculas.service';
 import { Pelicula } from '../../models/pelicula';
@@ -27,8 +27,12 @@ export class HomeComponent implements OnInit {
   public peliculas: Pelicula[] = [];
   public peliculasCarrousel: Pelicula[] = [];
 
-
-  constructor(private peliculasService: PeliculasService,private authService:AuthService) { }
+  constructor(
+    private peliculasService: PeliculasService,
+    private authService:AuthService
+    ) {}
+ 
+  
     ngOnInit(): void {
       this.peliculasService.getPeliculas().subscribe((peliculas: Pelicula[]) => {
         this.peliculas = peliculas;
@@ -41,5 +45,7 @@ export class HomeComponent implements OnInit {
           this.user = user;
         });
       }
-    }  
+ 
+  }
 }
+

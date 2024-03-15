@@ -10,17 +10,6 @@
                 <li class="nav-item">
                     <a class="nav-link active text-white fs-5" aria-current="page" href="#">Inicio</a>
                 </li>  
-             <!--<li class="nav-item dropdown" (mouseover)="onMouseOverSeries()" (mouseout)="onMouseOutSeries()">
-                    <a class="nav-link dropdown-toggle  text-white fs-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Series
-                    </a>
-                    <ul class="dropdown-menu" [ngClass]="{'show': showSeriesDropdown}">
-                      <li><a class="dropdown-item" href="#">Terror</a></li>
-                      <li><a class="dropdown-item" href="#">Comedia</a></li>
-                      <li><a class="dropdown-item" href="#">Drama</a></li>
-                      <li><a class="dropdown-item" href="#">Accion</a></li>
-                    </ul>
-                  </li>-->
                 <li class="nav-item dropdown" (mouseover)="onMouseOverMovies()" (mouseout)="onMouseOutMovies()" >
                     <a class="nav-link dropdown-toggle text-white fs-5">Peliculas</a>
                     <ul class="dropdown-menu"  [ngClass]="{'show': showMoviesDropdown}">
@@ -38,10 +27,35 @@
                   </ul>
                 </li>
             </ul>
-            <form class="d-flex me-4" role="search">
+         
+            <form class="d-flex me-2" role="search">
                 <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                <button class="btn fs-5 text-white" type="submit">Buscar</button>
             </form>
+            <div class="flex-shrink-0 dropdown" *ngIf="user.id">
+              <a href="#" class="d-block text-white text-decoration-none" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="d-flex text-white fs-5 me-4">
+                  <i class="bi bi-bell-fill position-relative">
+                  <span *ngIf="!(invitaciones.numNotificaciones===0)" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{invitaciones.numNotificaciones}}
+                  </span>
+                </i>
+                </div>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end shadow text-white" aria-labelledby="dropdownUser2" style="margin-top: 20px ;right: 30px; background-color: #09151a;">
+                <!--NOTIFICACIONES-->
+                <li *ngFor="let notificacion of invitaciones.notificaciones" style="width: 550px; height: 95px;">
+                  <div style="width: 550px; height: 50px;" class="">
+                  <div class="ms-3">{{notificacion.quien_envia.email}}</div>
+                  <div class="ms-3">{{notificacion.mensaje}}</div>
+                  <div class="d-flex justify-content-center mt-2">
+                    <button class="btn btn-primary" (click)="aceptarInvitacion(notificacion)">Aceptar</button>
+                    <button class="btn btn-danger ms-3" (click)="rechazarInvitacion(notificacion)">Rechazar</button>
+                  </div>
+                  </div>                
+                </li>
+              </ul>
+          </div>
+         
             <!--LOGIN-->
             <div *ngIf="user.id; then userblock else login"></div>
             <ng-template #userblock>
@@ -51,9 +65,9 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser2" style="right: 30px;">
                       <ng-template [ngIf]="user.rol_nombre == 'Administrador'">
-                      <li><a class="dropdown-item" [routerLink]="['dashboard']">Dashboard <i class="bi bi-gear fs-5 text-primary"></i></a></li>
+                      <li><a class="dropdown-item" [routerLink]="['/dashboard']">Dashboard <i class="bi bi-gear fs-5 text-primary"></i></a></li>
                     </ng-template> 
-                    <li><a class="dropdown-item" [routerLink]="['profile']">perfil <i class="bi bi-person-lines-fill fs-5 text-primary"></i></a></li>
+                    <li><a class="dropdown-item" [routerLink]="['/profile']">perfil <i class="bi bi-person-lines-fill fs-5 text-primary"></i></a></li>
                     <li>
                       <hr class="dropdown-divider">
                   </li>

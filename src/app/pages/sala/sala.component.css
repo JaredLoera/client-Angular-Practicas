@@ -1,0 +1,62 @@
+body{
+    background:#651fff;
+  }
+  
+  ::-webkit-scrollbar {
+      width: 10px
+  }
+  
+  ::-webkit-scrollbar-track {
+      background: #eee
+  }
+  
+  ::-webkit-scrollbar-thumb {
+      background: #888
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+      background: #555
+  }
+  
+  .wrapper {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #651FFF
+  }
+
+  .scroll {
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+      height: 325px
+  }
+  
+  .name {
+      font-size: 13px
+  }
+  .msg {
+      background-color: #c8c8c8;
+      font-size: 11px;
+      padding: 6px;
+      border-radius: 5px;
+      font-weight: 500;
+      color: #303030
+  }
+  .between {
+      font-size: 8px;
+      font-weight: 500;
+      color: #a09e9e
+  }
+  .form-control .message {
+      font-size: 12px;
+      font-weight: 400;
+      width: 230px;
+      height: 30px;
+      border: none
+  }
+  
+ 
+  
+
+  
