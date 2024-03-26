@@ -28,7 +28,17 @@ export class AuthService {
   register(user:User):Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/register`, user)  
   }
-
+  setUser(user: User): void {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('user', JSON.stringify(user));
+    }
+  }
+  getUser(): User | null {
+    if (typeof localStorage !== 'undefined') {
+      return JSON.parse(localStorage.getItem('user') as string);
+    }
+    return null;
+  }
   setAuthToken(token: string): void {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem(this.authTokenKey, token);

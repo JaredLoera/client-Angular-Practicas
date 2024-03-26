@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Sala ,salaInvitado} from '../../models/sala';
 import { AuthService } from '../auth/auth.service';
+import { Message } from '../../models/messages';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,8 @@ export class SalasService {
   }
   getSalasInvitado(){
     return this.http.get<salaInvitado[]>(`${this.baseUrl}/salas/invitado`,{headers: {Authorization: `Bearer ${this.authService.getAuthToken()}`}});
+  }
+  getMessagesSala(sala_id:number):Observable<Message[]>{
+    return this.http.get<Message[]>(`${this.baseUrl}/message/${sala_id}`,{headers: {Authorization: `Bearer ${this.authService.getAuthToken()}`}});
   }
 }

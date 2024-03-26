@@ -1,82 +1,100 @@
-<div class="container-fluid">
-    <div class="row vh-100">
-        <div class="col-8">
-            <video src=""></video>
-        </div>
-        <div class="col-4">
-            <div class="offcanvas offcanvas-end show" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-                id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-                <div class="offcanvas-header">
-                    <div>
-                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Chat</h5>
+<div class="video-container" [ngClass]="{'ocultarMouse':ocultarMouse}">
+    <video (click)="playPause()" #videoPlayer src="http://localhost:8000/{{pelicula.video_url}}"></video>
+    <div class="top-left">
+        <button class="back button-view">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+    </div>
+    <div class="top-right">
+        <button class="add-user button-view" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fas fa-user-plus"></i>
+        </button>
+    </div>
+    <div class="top-right mt-5" [ngClass]="{'fade-out': lastMessageFade }">
+        <div class="chat-messages" #chat style="height: 400px; overflow-y: auto; width: 300px;" >
+            <div *ngFor="let message of messages">
+                <div *ngIf="!(message.user_id != user.id); then other else  me "></div>
+                <ng-template #me>
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <span class="name text-white">{{message.user.email}}</span>
+                            <p class="msg othermessage">{{message.message}}</p>
+                        </div>
                     </div>
-                    <div class="ms-auto">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="bi bi-person-plus fs-4"></i>
-                        </a>
+                </ng-template>
+                <ng-template #other>
+                    <div class="d-flex align-items-center text-right justify-content-end">
+                        <div class="text-left"></div>
+                        <div class="">
+                            <span class="name text-white">yo</span>
+                            <p class="msg memesage">{{message.message}}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="offcanvas-body">
-                    <!-- Contenido del offcanvas -->
-                    <div class="chat-messages" style="height: 87%; overflow-y: auto;">
-                        <!-- Mensajes -->
-                        <div class="d-flex align-items-center">
-                            <div class="text-left pr-1"></div>
-                            <div class=""> 
-                                <span class="name">Jared</span>
-                                <p class="msg">Esta bien esta pelicula?</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center text-right justify-content-end">
-                            <div class=""> 
-                                <span class="name">Algun bato</span>
-                                <p class="msg">Chingue su madre el america</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="text-left pr-1"></div>
-                            <div class=""> 
-                                <span class="name">Alguen mas</span>
-                                <p class="msg">Si que chigue a su madre</p>
-                            </div>
-                        </div>
-                            <!-- Mensajes -->
-                    </div>
-                    <form class="mt-3">
-                        <div class="input-group border">
-                            <input type="text" class="form-control message" placeholder="Escribe tu mensaje">
-                            <button class="btn btn-primary" type="submit">Enviar</button>
-                        </div>
-                    </form>
-                </div>
+                </ng-template>
             </div>
+        </div><form [formGroup]="mensaje">
+        <div class="input-group border" style="border-radius: 10px; background-color: transparent;">
+                <input type="text" class="form-control text-white" style="background-color: transparent; color: white;" placeholder="Escribe tu mensaje" formControlName="texto">
+                <button style="background-color: transparent;" class="text-white" type="button" (click)="sendMessage()">Enviar</button>
+        </div></form>
+    </div>
+    <div class="bottom__video-control">
+        <div class="progress-bar-style" (click)="seek($event)">
+            <div class="watched-time" [style.width]="watchedTime"></div>
+            <div class="circle"></div>
+        </div>
+        <div class="left">
+            <button (click)="playPause()" class="play-pause button-view">
+                <i class="fas fa-play play" *ngIf="!playing"></i>
+                <i class="bi bi-pause-fill miPause" *ngIf="playing"></i>
+            </button>
+            <button (click)="back()" class="back button-view">
+                <i class="fas fa-undo-alt"></i>
+            </button>
+            <button (click)="forward()" class="forward button-view">
+                <i class="fas fa-redo-alt"></i>
+            </button>
+            <button (click)="toggleMute()" class="volume button-view">
+                <i class="fas fa-volume-up up" *ngIf="!muted"></i>
+                <i class="bi bi-volume-mute-fill" *ngIf="muted"></i>
+            </button>
+            <span class="video-title">{{pelicula.titulo}}</span>
+        </div>
+        <div class="right">
+            <button (click)="toggleFullscreen()" class="screen-size button-view">
+                <i class="fas fa-expand full" *ngIf="!isFullscreen"></i>
+                <i class="bi bi-fullscreen-exit" *ngIf="isFullscreen"></i>
+            </button>
         </div>
     </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir amigo</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div> 
-        <form  (ngSubmit)="submitForm()" [formGroup]="userFrom">
-        <div class="modal-body">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Correo del amigo</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email">
-                <div *ngIf="formSubmittedErrors && userFrom.get('email')!.invalid" class="mt-1 text-danger">
-                    <div *ngIf="userFrom.get('email')?.errors?.['required']">El correo es requerido.</div>
-                </div>
-                <div id="emailHelp" class="form-text">Agrega a tus amigos para que puedan ver peliculas contigo.</div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir amigo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form (ngSubmit)="submitForm()" [formGroup]="userFrom">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Correo del amigo</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            formControlName="email">
+                        <div *ngIf="formSubmittedErrors && userFrom.get('email')!.invalid" class="mt-1 text-danger">
+                            <div *ngIf="userFrom.get('email')?.errors?.['required']">El correo es requerido.</div>
+                        </div>
+                        <div id="emailHelp" class="form-text">Agrega a tus amigos para que puedan ver peliculas contigo.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-    </form>
-      </div>
     </div>
-  </div>
+</div>

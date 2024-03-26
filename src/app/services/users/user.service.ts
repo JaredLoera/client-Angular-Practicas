@@ -23,4 +23,7 @@ export class UserService {
   aceptInvitation(invitacion:Invitaciones):Observable<Invitaciones>{
     return this.http.put<Invitaciones>(`${this.baseUrl}/users/invitaciones/aceptar`,{invitacion},{headers: {Authorization: `Bearer ${this.authService.getAuthToken()}`}});
   }
+  sendMessages(sala_id:number,message:string){
+    return this.http.post(`${this.baseUrl}/message`,{sala_id,message},{headers: {Authorization: `Bearer ${this.authService.getAuthToken()}`}});
+  }
 }

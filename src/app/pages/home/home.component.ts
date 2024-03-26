@@ -41,9 +41,8 @@ export class HomeComponent implements OnInit {
         this.peliculasCarrousel = peliculas;
       });
       if(this.authService.isLoggedIn()){
-        this.authService.profile().subscribe((user:User) => {
-          this.user = user;
-        });
+        this.user = this.authService.getUser()!
+        console.log(this.user)
       }
  
   }

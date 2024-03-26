@@ -12,12 +12,14 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { GeneroComponent } from './pages/genero/genero.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SalaComponent } from './pages/sala/sala.component';
+import { authGuard } from './guards/auth.guard';
+import { rolsGuard } from './guards/rols.guard';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent},
-    { path: 'dashboard', component: DashboardComponent},
+    { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard, rolsGuard]},
     { path: 'configuration', component: ConfigurationComponent},
     { path: 'verify-mail/:id', component: VerifyMailComponent},
     { path: 'movies', component: MoviesComponent},

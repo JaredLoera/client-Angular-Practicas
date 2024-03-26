@@ -1,9 +1,76 @@
-<div class="container mt-5">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <video src="http://localhost:8000/{{pelicula.video_url}}" #videoPlayer controls autoplay>
-          Su navegador no soporta la etiqueta de video.
-          </video>
+<div class="video-container" [ngClass]="{'ocultarMouse':ocultarMouse}">
+  <video (click)="playPause()" #videoPlayer autoplay src="http://localhost:8000/{{pelicula.video_url}}">
+
+</video>
+  <div class="top-left">
+    <button class="back button-player">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+</div>
+<div class="top-right">
+    <button class="add-user button-player" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fas fa-user-plus"></i>
+    </button>
+</div>
+  <div class="bottom__video-control">
+    <div class="progress-bar-style" (click)="seek($event)">
+      <div class="watched-time" [style.width]="watchedTime"></div>
+      <div class="circle"></div>
+  </div>
+      <div class="left">
+          <button (click)="playPause()" class="play-pause button-player">
+              <i class="fas fa-play play" *ngIf="!playing"></i>
+              <i class="bi bi-pause-fill miPause" *ngIf="playing"></i>
+          </button>
+          <button (click)="back()" class="back button-player">
+              <i class="fas fa-undo-alt"></i>
+          </button>
+          <button (click)="forward()" class="forward button-player">
+              <i class="fas fa-redo-alt"></i>
+          </button>
+          <button (click)="toggleMute()" class="volume button-player">
+              <i class="fas fa-volume-up up" *ngIf="!muted"></i>
+              <i class="bi bi-volume-mute-fill" *ngIf="muted"></i>
+          </button>
+          <span class="video-title">{{ pelicula.titulo }}</span>
+      </div>
+      <div class="right">
+          <button (click)="toggleFullscreen()" class="screen-size button-player">
+              <i class="fas fa-expand full" *ngIf="!isFullscreen"></i>
+              <i class="bi bi-fullscreen-exit" *ngIf="isFullscreen"></i>
+          </button>
+      </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-3" id="exampleModalLabel">¿Crear sala?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form (ngSubmit)="sumitFormSala()" [formGroup]="salaFormNew">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="salaNombre" class="fs-4">Nombre de la sala</label>
+                <input type="text" class="form-control" id="salaNombre" aria-describedby="salaNombre" formControlName="nombre">
+            </div>
+            <div class="form-group mt-3">
+                <label for="salaNombre" class="fs-4">Amigos</label>
+                <textarea class="form-control" id="salaDescripcion" rows="3"></textarea>
+                <div>
+                    <div id="emailHelp" class="form-text fs-5">Puedes agregar varios amigos separandolos por una coma "," en cada correo.</div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar sala</button>
+        </div>
+         </form>
       </div>
     </div>
   </div>

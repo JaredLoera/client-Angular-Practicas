@@ -21,16 +21,9 @@ export class DashboardComponent implements OnInit{
   user = new User();
   constructor(private authService: AuthService, private router: Router){}
   ngOnInit():void{
-    console.log(this.authService.getAuthToken() );
-    if(!this.authService.isLoggedIn()){
-      this.router.navigate(['']);
-    }
     this.authService.profile().subscribe((user:User) => {
       console.log('User profile', user);
       this.user = user;
-        if(!(user.rol_nombre=="Administrador")){
-          this.router.navigate(['']);
-        }
     })
   }
   sendEmailConfirm(){

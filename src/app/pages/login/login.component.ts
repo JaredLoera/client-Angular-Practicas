@@ -22,7 +22,7 @@ import { NavHomeComponent } from '../../components/nav-home/nav-home.component';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent{
   public userForm: FormGroup;
   formSubmittedErrors = false;
   user: User = new User();
@@ -32,22 +32,24 @@ export class LoginComponent implements OnInit{
       password: [this.user.password, [Validators.required]]
     });
   }
-  ngOnInit(){
-    if(this.authService.isLoggedIn()){
-      this.router.navigate(['dashboard']);
-    }
-  }
   submitForm() {
     if (this.userForm.valid) {
       this.user = this.userForm.value;
       this.authService.login(this.user).subscribe((token:Token) => {
         console.log('User logged in', token);
         this.authService.setAuthToken(token.token);
-        this.router.navigate(['/dashboard']);
+        this.cargarPerfil();
       });
     }
     else {
       this.formSubmittedErrors = true;
     }
+  }
+  cargarPerfil(){
+    this.authService.profile().subscribe((user:User) => {
+      console.log('User profile', user);
+      this.user = user;
+      this.authService.setUser(user);
+    });
   }
 }
